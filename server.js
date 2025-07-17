@@ -17,8 +17,8 @@ let PAYPAL_API = 'https://api-m.sandbox.paypal.com'; // Sandbox endpoint
 let { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET } = process.env;
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:3000',  // or wherever your React app runs
-  credentials: true                // 🔥 must be true to support cookies
+  origin: 'http://localhost:3000',  
+  credentials: true                
 }));
 app.use('/uploads', express.static('uploads'));
 
@@ -32,12 +32,12 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1:27017/e' }),
-  cookie: { maxAge: 1000 * 60 * 60 } // 1 hour
+  cookie: { maxAge: 1000 * 60 * 60 } 
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Get PayPal access token
+
 async function getPayPalAccessToken() {
   let auth = Buffer.from(`${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`).toString('base64');
 
@@ -58,7 +58,7 @@ async function getPayPalAccessToken() {
   }
 }
 
-// Create PayPal Order
+
 app.post('/create-paypal-order', async (req, res) => {
   let { amount } = req.body;
 
@@ -91,7 +91,7 @@ app.post('/create-paypal-order', async (req, res) => {
   }
 });
 passport.use(new LocalStrategy(
-  { usernameField: 'mail' },  // tell passport to use `mail` instead of `username`
+  { usernameField: 'mail' },  
   async (mail, password, done) => {
     let user = await User.findOne({ mail });
     if (!user) return done(null, false, { message: 'User not found' });
@@ -104,7 +104,7 @@ passport.use(new LocalStrategy(
 ));
 
 passport.serializeUser((user, done) => {
-  done(null, user); // Store only the user ID in session
+  done(null, user); 
 });
 
 passport.deserializeUser(async (id, done) => {
@@ -147,11 +147,11 @@ function ensureAuth(req, res, next) {
 
     let storage = multer.diskStorage({
         destination: (req, file, cb) => {
-          return cb(null, './uploads');  // The folder where files will be stored
+          return cb(null, './uploads'); 
         },
         filename: (req, file, cb) => {
-          let filename = Date.now() + path.extname(file.originalname);  // Generate unique filename
-          return cb(null, filename);  // Provide the generated filename
+          let filename = Date.now() + path.extname(file.originalname); 
+          return cb(null, filename); 
         }
       });
 
@@ -268,10 +268,10 @@ app.get('/all_products', async (req, res) => {
         return res.status(404).json({ msg: 'Cart is empty or user not found' });
     }
 
-    // user.cart is assumed to be an array of product IDs
+    
     let cartProductIds = user.cart;
 
-    // Find all products whose _id is in the cart
+    
     let products = await Store.find({ _id: { $in: cartProductIds } });
 
     res.json({ msg: 'Showing cart items', products });
@@ -294,12 +294,12 @@ app.get('/all_products', async (req, res) => {
     let cart=user.cart
     let item=await cart.find(p=>p.name==product.name && p.price==product.price && p.image==product.image)
     if (item.qnt > 1) {
-        item.qnt -= 1; // Just decrease quantity
+        item.qnt -= 1; 
         await user.save()
     let qnt=item.qnt
     res.json({msg:'item updated',qnt});
     } else {
-        // Remove product when qnt reaches 0
+       
         user.cart = user.cart.filter(p => p.name !== product.name && p.price!==product.price && p.image!==product.image);
         await user.save()
         res.json({msg:'item removed'});

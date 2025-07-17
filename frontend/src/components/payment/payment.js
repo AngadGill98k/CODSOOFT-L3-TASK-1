@@ -17,11 +17,10 @@ useEffect(() => {
   let canAccess = sessionStorage.getItem("canAccessPayment") === "true";
   
   if (!canAccess || !cart.length || !total) {
-    navigate('/cart'); // 🚫 Redirect if direct access or no data
+    navigate('/cart'); 
   }
 
   return () => {
-    // Clear the flag when leaving or refreshing
     sessionStorage.removeItem("canAccessPayment");
   };
 }, [cart, total, navigate]);
@@ -30,7 +29,6 @@ useEffect(() => {
   let handleSuccess = (details) => {
     alert(`Transaction completed by ${details.payer.name.given_name}`);
     console.log("✅ Payment Details:", details);
-    // You can send this + cart + user info to backend now
   };
 
 return (

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import './store.css'; // ✅ Import CSS
+import './store.css'; 
 import Navbar from '../navabar/navbar';
 import { useNavigate } from 'react-router-dom';
 const Store = () => {
