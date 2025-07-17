@@ -3,14 +3,14 @@ import './prouct.css';
 import { useLocation } from 'react-router-dom';
 import Navbar from '../navabar/navbar';
 
-const Product = () => {
+let Product = () => {
   let location = useLocation();
   let { name, id, userid, price, desc, quantity, image } = location.state || {};
   let [added, setAdded] = useState(false);
 
   
 
-  const cart = () => {
+  let cart = () => {
     let product = {
       id,
       name,

@@ -1,20 +1,20 @@
-const express = require('express')
-const app = express()
-const PORT = 3001
-const path = require('path')
-const mongoose = require('mongoose');
-const cors = require('cors');
+let express = require('express')
+let app = express()
+let PORT = 3001
+let path = require('path')
+let mongoose = require('mongoose');
+let cors = require('cors');
 require('dotenv').config();
-const axios = require("axios");
-const User=require('./models/user.js')
-const Store=require('./models/store.js')
-const bcrypt = require('bcrypt');
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const PAYPAL_API = 'https://api-m.sandbox.paypal.com'; // Sandbox endpoint
-const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET } = process.env;
+let axios = require("axios");
+let User=require('./models/user.js')
+let Store=require('./models/store.js')
+let bcrypt = require('bcrypt');
+let session = require('express-session');
+let MongoStore = require('connect-mongo');
+let passport = require('passport');
+let LocalStrategy = require('passport-local').Strategy;
+let PAYPAL_API = 'https://api-m.sandbox.paypal.com'; // Sandbox endpoint
+let { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET } = process.env;
 app.use(express.json());
 app.use(cors({
   origin: 'http://localhost:3000',  // or wherever your React app runs
@@ -22,7 +22,7 @@ app.use(cors({
 }));
 app.use('/uploads', express.static('uploads'));
 
-const multer=require('multer')
+let multer=require('multer')
 mongoose.connect('mongodb://127.0.0.1:27017/e')
     .then(() => console.log('MongoDB connected'))
     .catch((err) => console.error('MongoDB connection error:', err));
@@ -39,10 +39,10 @@ app.use(passport.session());
 
 // Get PayPal access token
 async function getPayPalAccessToken() {
-  const auth = Buffer.from(`${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`).toString('base64');
+  let auth = Buffer.from(`${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`).toString('base64');
 
   try {
-    const response = await axios.post(`${PAYPAL_API}/v1/oauth2/token`, 
+    let response = await axios.post(`${PAYPAL_API}/v1/oauth2/token`, 
       'grant_type=client_credentials', 
       {
         headers: {
@@ -60,14 +60,14 @@ async function getPayPalAccessToken() {
 
 // Create PayPal Order
 app.post('/create-paypal-order', async (req, res) => {
-  const { amount } = req.body;
+  let { amount } = req.body;
 
   if (!amount) return res.status(400).json({ error: 'Amount is required' });
 
   try {
-    const accessToken = await getPayPalAccessToken();
+    let accessToken = await getPayPalAccessToken();
 
-    const order = await axios.post(`${PAYPAL_API}/v2/checkout/orders`, {
+    let order = await axios.post(`${PAYPAL_API}/v2/checkout/orders`, {
       intent: 'CAPTURE',
       purchase_units: [
         {
@@ -93,10 +93,10 @@ app.post('/create-paypal-order', async (req, res) => {
 passport.use(new LocalStrategy(
   { usernameField: 'mail' },  // tell passport to use `mail` instead of `username`
   async (mail, password, done) => {
-    const user = await User.findOne({ mail });
+    let user = await User.findOne({ mail });
     if (!user) return done(null, false, { message: 'User not found' });
 
-    const match = await bcrypt.compare(password, user.pass);
+    let match = await bcrypt.compare(password, user.pass);
     if (!match) return done(null, false, { message: 'Wrong password' });
 
     return done(null, user._id);
@@ -145,17 +145,17 @@ function ensureAuth(req, res, next) {
 
 
 
-    const storage = multer.diskStorage({
+    let storage = multer.diskStorage({
         destination: (req, file, cb) => {
           return cb(null, './uploads');  // The folder where files will be stored
         },
         filename: (req, file, cb) => {
-          const filename = Date.now() + path.extname(file.originalname);  // Generate unique filename
+          let filename = Date.now() + path.extname(file.originalname);  // Generate unique filename
           return cb(null, filename);  // Provide the generated filename
         }
       });
 
-      const upload=multer({storage})
+      let upload=multer({storage})
 
 
 
@@ -216,15 +216,15 @@ app.post('/search',ensureAuth, async (req, res) => {
 
 app.post('/add_p',ensureAuth, upload.single('img'), async (req, res) => {
     
-      const {  p_name, p_price,p_des,qnt } = req.body;
+      let {  p_name, p_price,p_des,qnt } = req.body;
 let username=req.user
-      const imagePath = `/uploads/${req.file.filename}`;
-      const userid= req.user
+      let imagePath = `/uploads/${req.file.filename}`;
+      let userid= req.user
      
       console.log("id is",req.user)
-      const user=await User.findOne({_id:userid})
+      let user=await User.findOne({_id:userid})
        console.log("user is",user._id)
-      const store= await new Store({
+      let store= await new Store({
         name:p_name,
         userid:user._id,
         price:p_price,
@@ -243,7 +243,7 @@ let username=req.user
 
 app.get('/all_products', async (req, res) => {
     try {
-        const products = await Store.find();
+        let products = await Store.find();
         res.json({ products });
     } catch (err) {
         res.status(500).json({ msg: 'Failed to fetch products', error: err });

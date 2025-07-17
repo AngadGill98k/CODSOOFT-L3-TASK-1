@@ -2,19 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import "./pay.css"
-const Payment = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
+let Payment = () => {
+  let location = useLocation();
+  let navigate = useNavigate();
 
-  const cart = location.state?.cart || [];
-  const total = location.state?.total || 0;
+  let cart = location.state?.cart || [];
+  let total = location.state?.total || 0;
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [userPhone, setUserPhone] = useState('');
+  let [name, setName] = useState('');
+  let [email, setEmail] = useState('');
+  let [userPhone, setUserPhone] = useState('');
 
 useEffect(() => {
-  const canAccess = sessionStorage.getItem("canAccessPayment") === "true";
+  let canAccess = sessionStorage.getItem("canAccessPayment") === "true";
   
   if (!canAccess || !cart.length || !total) {
     navigate('/cart'); // 🚫 Redirect if direct access or no data
@@ -27,7 +27,7 @@ useEffect(() => {
 }, [cart, total, navigate]);
 
 
-  const handleSuccess = (details) => {
+  let handleSuccess = (details) => {
     alert(`Transaction completed by ${details.payer.name.given_name}`);
     console.log("✅ Payment Details:", details);
     // You can send this + cart + user info to backend now

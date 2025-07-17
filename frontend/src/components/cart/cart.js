@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../navabar/navbar';
 import './cart.css';
 
-const Cart = () => {
-  const [items, setItems] = useState([]);
+let Cart = () => {
+  let [items, setItems] = useState([]);
   
-  const navigate = useNavigate();
-  const url = 'http://localhost:3001';
+  let navigate = useNavigate();
+  let url = 'http://localhost:3001';
 
   useEffect(() => {
     fetch(`${url}/ret_cart`, {
@@ -25,9 +25,9 @@ const Cart = () => {
       });
   }, []);
 
-  const plus = (index) => {
+  let plus = (index) => {
     setItems(prev => {
-      const updated = [...prev];
+      let updated = [...prev];
       if (updated[index].qnt < updated[index].quantity) {
         updated[index].qnt += 1;
       }
@@ -35,9 +35,9 @@ const Cart = () => {
     });
   };
 
-  const minus = (index) => {
+  let minus = (index) => {
     setItems(prev => {
-      const updated = [...prev];
+      let updated = [...prev];
       if (updated[index].qnt > 1) {
         updated[index].qnt -= 1;
       } else {
@@ -47,15 +47,15 @@ const Cart = () => {
     });
   };
 
-const payment = () => {
-  const total = items.reduce((sum, value) => sum + (value.price * value.qnt), 0);
+let payment = () => {
+  let total = items.reduce((sum, value) => sum + (value.price * value.qnt), 0);
   sessionStorage.setItem("canAccessPayment", "true"); // ✅ Allow access
   navigate('/payment', { state: { cart: items, total } });
 };
 
 
-  const Bill = ({ items }) => {
-    const total = items.reduce((sum, value) => sum + (value.price * value.qnt), 0);
+  let Bill = ({ items }) => {
+    let total = items.reduce((sum, value) => sum + (value.price * value.qnt), 0);
     return (
       <div className="bill-summary">
         <h3>Bill Summary</h3>
