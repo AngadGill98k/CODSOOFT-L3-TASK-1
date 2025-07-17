@@ -1,0 +1,108 @@
+/* Overall page background */
+body {
+  background-color: #f4f6f8;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main container */
+.cart-container {
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Cart Items List */
+.cart-items {
+  list-style: none;
+  padding: 0;
+}
+
+/* Single Cart Item */
+.cart-item {
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #fdfdfd;
+}
+
+/* Item Layout */
+.item-content {
+  display: flex;
+  align-items: center;
+}
+
+/* Image */
+.item-image {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 20px;
+  border-radius: 8px;
+}
+
+/* Item Details */
+.item-details {
+  flex: 1;
+}
+
+/* Controls for quantity */
+.item-controls {
+  margin-top: 10px;
+}
+
+.item-controls button {
+  padding: 4px 8px;
+  margin: 0 5px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.item-controls button:hover {
+  background-color: #2980b9;
+}
+
+/* Billing Section */
+.bill-summary {
+  margin-top: 30px;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.03);
+}
+
+.bill-list {
+  list-style: none;
+  padding: 0;
+}
+
+.bill-total {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+/* Payment Button */
+.payment-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.payment-button:hover {
+  background-color: #1e8449;
+}

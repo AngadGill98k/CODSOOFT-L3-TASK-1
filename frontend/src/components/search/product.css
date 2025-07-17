@@ -1,0 +1,143 @@
+/* Entire product list container */
+ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Search Bar Container */
+#search {
+  background-color: #ecf0f1;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Inner search box wrapper */
+#sub_s {
+  background-color: #ffffff;
+  padding: 10px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Input box styling */
+#inp {
+  border: none;
+  border-radius: 30px;
+  height: 36px;
+  width: 500px;
+  padding-left: 20px;
+  font-size: 1rem;
+  outline: none;
+}
+
+/* Search button */
+#btn_s {
+  border: none;
+  background-color: #3498db;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+#btn_s:hover {
+  background-color: #2980b9;
+}
+
+/* Each product item */
+li {
+  width: 90%;
+  max-width: 900px;
+  background-color: #ffffff;
+  display: flex;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+li:hover {
+  transform: scale(1.01);
+}
+
+/* Product image */
+.product img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 20px;
+}
+
+/* Product details */
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 5px;
+}
+
+strong {
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+price {
+  font-weight: bold;
+  color: #e74c3c;
+  margin-top: 5px;
+}
+
+.details div {
+  margin: 5px 0;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  justify-items: center;
+}
+
+/* Each product card */
+.product-card {
+  background-color: #ffffff;
+  padding: 12px;
+  width: 220px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+  transform: scale(1.02);
+}
+
+.details {
+  padding-top: 10px;
+}
+
+strong {
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+price {
+  font-weight: bold;
+  color: #e74c3c;
+  display: block;
+  margin-top: 5px;
+}
