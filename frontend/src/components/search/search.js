@@ -100,7 +100,12 @@ const Search = () => {
           <div className='details'>
             <div><strong>{product.name}</strong></div>
             <div><price>${product.price}</price></div>
-            <div>{product.description}</div>
+            <div>
+  {product.description.length > 30 
+    ? product.description.substring(0, 30) + '...' 
+    : product.description}
+</div>
+
           </div>
         </div>
       </div>
